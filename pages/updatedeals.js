@@ -24,9 +24,9 @@ const UpdateData = () => {
         dateAdded: data.dateAdded, //sortKey (if any)
       },
       UpdateExpression:
-        "set source = :p, category = :r, image = :q, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k",
+        "set dealsource = :p, category = :r, image = :q, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k",
       ExpressionAttributeValues: {
-        ":p": event.target.source.value,
+        ":p": event.target.dealsource.value,
         ":r": event.target.category.value,
         ":q": event.target.image.value,
         ":z": event.target.textLink.value,
@@ -42,7 +42,7 @@ const UpdateData = () => {
       const data = await ddbDocClient.send(new UpdateCommand(params));
       console.log("Success - updated", data);
       alert('Data Updated Successfully')
-      router.push('/viewdata')
+      router.push('/')
     } catch (err) {
       console.log("Error", err);
     }
@@ -78,8 +78,8 @@ const UpdateData = () => {
         <div className="block p-6 rounded-lg shadow-lg bg-white w-1/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
-              <label htmlFor="source" className="form-label inline-block mb-2 text-gray-700">Source</label>
-              <input type="text" className={styles.inputField} id="source" name="source" defaultValue={data.source} />
+              <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Source</label>
+              <input type="text" className={styles.inputField} id="dealsource" name="dealsource" defaultValue={data.dealsource} />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>

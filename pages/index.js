@@ -92,7 +92,7 @@ const ViewData = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {item.id}
                       </td>
-                      <td className={Styles.tableData}>{item.source}</td>
+                      <td className={Styles.tableData}>{item.dealsource}</td>
                       <td className={Styles.tableData}>{item.category}</td>
                       <td className={Styles.tableData}>{item.image}</td>
                       <td className={Styles.tableData}>{item.textLink}</td>
@@ -104,11 +104,11 @@ const ViewData = () => {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
                         <Link
                           href={{
-                            pathname: "/updatedata",
+                            pathname: "/updatedeals",
                             query: {
                               id: item.id,
                               dateAdded: item.dateAdded,
-                              source: item.source,
+                              dealsource: item.dealsource,
                               category: item.category,
                               image: item.image,
                               textLink: item.textLink,

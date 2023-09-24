@@ -21,7 +21,7 @@ const AddData = () => {
         id: Math.floor(Math.random() * 10000),
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
-        source: event.target.source.value,
+        dealsource: event.target.dealsource.value,
         category: event.target.category.value,
         image: event.target.image.value,
         textLink: event.target.textLink.value,
@@ -31,11 +31,13 @@ const AddData = () => {
       },
     };
 
+    console.log(params)
+
     try {
       const data = await ddbDocClient.send(new PutCommand(params));
       console.log("Success - item added", data);
       alert("Data Added Successfully");
-      router.push("/viewdata");
+      router.push("/");
       document.getElementById("addData-form").reset();
     } catch (err) {
       console.log("Error", err.stack);
@@ -71,8 +73,8 @@ const AddData = () => {
         <div className="block p-6 rounded-lg shadow-lg bg-white w-1/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
-              <label htmlFor="source" className="form-label inline-block mb-2 text-gray-700">Source</label>
-              <input type="text" className={styles.inputField} id="source" />
+              <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Source</label>
+              <input type="text" className={styles.inputField} id="dealsource" />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
