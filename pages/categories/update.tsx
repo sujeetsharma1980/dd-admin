@@ -52,7 +52,7 @@ const UpdateData = () => {
         <div className="flex w-2/3 justify-end py-4">
           <Link
             href={{
-              pathname: "/",
+              pathname: "/categories/view",
             }}
           >
             <button
@@ -67,7 +67,7 @@ const UpdateData = () => {
               focus:ring-0 active:bg-blue-800 
               active:shadow-lg transition 
               duration-150 ease-in-out"
-            >Update categories</button>
+            >View categories</button>
           </Link>
         </div>
 
@@ -88,7 +88,10 @@ const UpdateData = () => {
             </div>
             <div className="form-group mb-6">
               <label htmlFor="deleted" className="form-label inline-block mb-2 text-gray-700">Deleted</label>
-              <input type="text" className={styles.inputField} id="deleted" name="deleted" defaultValue={data.deleted} />
+              <select className={styles.inputField} id="deleted" defaultValue={data.deleted}>
+                <option value='y' key='y'>y</option>
+                <option value='n' key='n'>n</option>
+              </select>
             </div>
 
             <button type="submit" className="

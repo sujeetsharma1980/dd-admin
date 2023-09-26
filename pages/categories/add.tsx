@@ -20,7 +20,7 @@ const AddData = () => {
       TableName: "Deals",
       Item: {
         pk: "CATEGORIES",
-        sk: "C#" + uuidv4(),
+        sk: "C#" + event.target.categoryname.value, //uuidv4(),
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
         categoryname: event.target.categoryname.value,
@@ -64,7 +64,7 @@ const AddData = () => {
               focus:ring-0 active:bg-blue-800 
               active:shadow-lg transition 
               duration-150 ease-in-out"
-            >View categories</button>
+            >View Categories</button>
           </Link>
         </div>
 

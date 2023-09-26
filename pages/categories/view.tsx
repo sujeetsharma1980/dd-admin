@@ -89,15 +89,14 @@ const ViewData = () => {
           >Add categories</button>
         </Link>
       </div>
-      <p className="text-3xl">View Categories</p>
-      <div className="flex flex-col w-2/3 py-10">
+      <p className="text-3xl">Categories</p>
+      <div className="flex flex-col  py-10">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
+            <div className="overflow-hidden bg-white">
               <table className="min-w-full">
                 <thead className="border-b">
                   <tr>
-                    <th scope="col" className={Styles.tableHeadings}>pk</th>
                     <th scope="col" className={Styles.tableHeadings}>Category Name</th>
                     <th scope="col" className={Styles.tableHeadings}>LOB</th>
                     <th scope="col" className={Styles.tableHeadings}>Text Image</th>
@@ -112,11 +111,10 @@ const ViewData = () => {
                 </thead>
                 <tbody>
                   {tableData.map((item: any) => (
-                    <tr className="border-b" key={item.pk}>
+                    <tr className="border-b" key={item.sk}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {item.pk}
+                        {item.categoryname}
                       </td>
-                      <td className={Styles.tableData}>{item.categoryname}</td>
                       <td className={Styles.tableData}>{item.lob}</td>
                       <td className={Styles.tableData}>{item.image}</td>
                       <td className={Styles.tableData}>{item.dateAdded}</td>

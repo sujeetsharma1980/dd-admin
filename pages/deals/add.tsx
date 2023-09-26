@@ -3,6 +3,8 @@ import { ddbDocClient } from "../../config/ddbDocClient";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from "react";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 const styles = {
   inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
@@ -10,6 +12,50 @@ const styles = {
 
 const AddData = () => {
   const router = useRouter();
+
+  const [brandsData, setBrandsData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  useEffect(() => {
+    getBrands();
+    getCategories();
+  }, []);
+
+  //   scanning the dynamodb table
+  const getBrands = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'BRANDS'
+        }
+      }
+      const bdata = await ddbDocClient.send(new ScanCommand(params));
+      setBrandsData(bdata.Items);
+      console.log("bdata", bdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
+  //   scanning the dynamodb table
+  const getCategories = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'CATEGORIES'
+        }
+      }
+      const cdata = await ddbDocClient.send(new ScanCommand(params));
+      setCategoriesData(cdata.Items);
+      console.log("cdata", cdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
@@ -19,7 +65,7 @@ const AddData = () => {
     const params = {
       TableName: "Deals",
       Item: {
-        pk: "P#" + uuidv4(),
+        pk: "P#" + event.target.textLink.value, //uuidv4(),
         sk: "METADATA",
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
@@ -30,6 +76,7 @@ const AddData = () => {
         description: event.target.description.value,
         listprice: event.target.listprice.value,
         dealprice: event.target.dealprice.value,
+        expiredon: event.target.expiredon.value,
         deleted: "n"
       },
     };
@@ -72,39 +119,47 @@ const AddData = () => {
           </Link>
         </div>
 
-          <p className="text-3xl mb-20">Add Deals</p>
-          <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
-            <form onSubmit={handleSubmit} id="addData-form">
-              <div className="form-group mb-6">
-                <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Source</label>
-                <input type="text" className={styles.inputField} id="dealsource" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-                <input type="text" className={styles.inputField} id="category" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
-                <input type="text" className={styles.inputField} id="image" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Link</label>
-                <input type="text" className={styles.inputField} id="textLink" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
-                <input type="text" className={styles.inputField} id="description" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
-                <input type="text" className={styles.inputField} id="listprice" />
-              </div>
-              <div className="form-group mb-6">
-                <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
-                <input type="text" className={styles.inputField} id="dealprice" />
-              </div>
+        <p className="text-3xl mb-20">Add Deals</p>
+        <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
+          <form onSubmit={handleSubmit} id="addData-form">
+            <div className="form-group mb-6">
+              <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Brand</label>
+              <select className={styles.inputField} id="dealsource">
+                {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
+              <select className={styles.inputField} id="category">
+                {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
+              <input type="text" className={styles.inputField} id="image" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Deal   Link</label>
+              <input type="text" className={styles.inputField} id="textLink" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
+              <textarea className={styles.inputField} id="description" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
+              <input type="text" className={styles.inputField} id="listprice" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
+              <input type="text" className={styles.inputField} id="dealprice" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="expiredon" className="form-label inline-block mb-2 text-gray-700">Expired On</label>
+              <input type="date" className={styles.inputField} id="expiredon" />
+            </div>
 
-              <button type="submit" className="
+            <button type="submit" className="
               px-6
               py-2.5
               bg-blue-600
@@ -121,8 +176,8 @@ const AddData = () => {
               transition
               duration-150
               ease-in-out">Submit</button>
-            </form>
-   
+          </form>
+
         </div>
       </div>
     </>

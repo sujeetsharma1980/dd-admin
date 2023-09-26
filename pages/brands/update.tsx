@@ -88,7 +88,10 @@ const UpdateData = () => {
             </div>
             <div className="form-group mb-6">
               <label htmlFor="deleted" className="form-label inline-block mb-2 text-gray-700">Deleted</label>
-              <input type="text" className={styles.inputField} id="deleted" name="deleted" defaultValue={data.deleted} />
+              <select className={styles.inputField} id="deleted" defaultValue={data.deleted}>
+                <option value='y' key='y'>y</option>
+                <option value='n' key='n'>n</option>
+              </select>
             </div>
 
             <button type="submit" className="

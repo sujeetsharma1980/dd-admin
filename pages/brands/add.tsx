@@ -20,7 +20,7 @@ const AddData = () => {
       TableName: "Deals",
       Item: {
         pk: "BRANDS",
-        sk: "B#" + uuidv4(),
+        sk: "B#" + event.target.brandname.value, //uuidv4(),
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
         brandname: event.target.brandname.value,
