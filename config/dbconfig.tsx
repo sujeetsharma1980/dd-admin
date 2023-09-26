@@ -8,8 +8,11 @@ console.log('process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID - ' + process.env.NEXT_PU
 console.log('process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY - ' + process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY);
 const ddbClient = new DynamoDBClient({
   region: REGION,
+  
   credentials: {
+    //@ts-ignore
     accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+    //@ts-ignore
     secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
   },
 });
