@@ -112,7 +112,7 @@ const ViewData = () => {
                 </thead>
                 <tbody>
                   {tableData.map((item: any) => (
-                    <tr className="border-b" key={item.id}>
+                    <tr className="border-b" key={item.pk}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {item.pk}
                       </td>
