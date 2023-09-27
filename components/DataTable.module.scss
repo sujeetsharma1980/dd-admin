@@ -15,11 +15,19 @@
   .thbackgroundcolordarkgray{
     // background-color: #47596d;
     background-color: white;
+    border-width: 2px;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #e5e7eb;
     // border-right:1px solid #fff
   }
   .thbackgroundcolorlightgray{
     //background-color: #758391;
     background-color: white;
+    border-width: 2px;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #e5e7eb;
   }
   .theadbtn{
     color: rgb(17 24 39);
@@ -43,6 +51,11 @@
     text-align: center;
     padding: 5px 25px;
     width:50%;
+  }
+
+  .imgclass {
+    width: 100px;
+    max-width: 100px;
   }
   
   .search{
