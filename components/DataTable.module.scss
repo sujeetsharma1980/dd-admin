@@ -41,7 +41,7 @@
   .tabledata{
     border: 1px solid #ddd;
     text-align: center;
-    padding: 5px 20px;
+    padding: 5px 25px;
     width:50%;
   }
   
@@ -64,6 +64,7 @@
   .datatablefooter{
     display:flex;
     flex-direction:row;
+    padding-top: 20px;
     justify-content: space-between;
     align-items: center
   }
