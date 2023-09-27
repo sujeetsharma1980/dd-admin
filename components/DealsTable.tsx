@@ -111,7 +111,7 @@ const DealsTable = (props) => {
                 <td className={styles.tabledata}>{item.dateModified}</td>
                 <td className={styles.tabledata}>{item.expiredon}</td>
                 <td className={styles.tabledata}>{item.deleted}</td>
-                <td>
+                <td className={styles.tableactiondata}>
                   <Link
                     href={{
                       pathname: "/deals/update",

@@ -15,7 +15,8 @@
   .thbackgroundcolordarkgray{
     // background-color: #47596d;
     background-color: white;
-    border-width: 2px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
     box-sizing: border-box;
     border-style: solid;
     border-color: #e5e7eb;
@@ -24,7 +25,8 @@
   .thbackgroundcolorlightgray{
     //background-color: #758391;
     background-color: white;
-    border-width: 2px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
     box-sizing: border-box;
     border-style: solid;
     border-color: #e5e7eb;
@@ -42,14 +44,20 @@
   
   .tablerow{
     &:nth-child(even) {
-      background-color: #f5f5f7;  
+      // background-color: #f5f5f7;  
     }
     
   }
   .tabledata{
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     text-align: center;
     padding: 5px 25px;
+    width:50%;
+  }
+
+  .tableactiondata{
+    border-bottom: 1px solid #ddd;
+    text-align: center;
     width:50%;
   }
 
