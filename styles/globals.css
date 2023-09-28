@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.amplify-button--primary {
+    -webkit-appearance: button;
+    background-color: #047d95!important;
+    background-image: none;
+}
