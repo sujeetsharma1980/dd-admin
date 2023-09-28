@@ -14,8 +14,10 @@ type Props = {
   open: boolean;
   navItems?: NavItem[];
   setOpen(open: boolean): void;
+  signOut: any;
+  user: any;
 };
-const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
+const Sidebar = ({ open, navItems = defaultNavItems, setOpen, user, signOut  }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, (e) => {
     setOpen(false);
@@ -59,9 +61,9 @@ const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
         <div className="flex gap-4 items-center">
          
           <div className="flex flex-col ">
-            <span className="text-indigo-50 my-0">Tom Cook</span>
-            <Link href="/" className="text-indigo-200 text-sm">
-              View Profile
+            <span className="text-indigo-50 my-0">{user.username}</span>
+            <Link href="/"  onClick={() => signOut()} className="text-indigo-200 text-sm">
+              Logout
             </Link>
           </div>
         </div>
