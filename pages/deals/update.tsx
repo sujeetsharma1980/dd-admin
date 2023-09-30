@@ -1,4 +1,4 @@
-import { ddbDocClient } from "../../config/ddbDocClient";
+import { ddbDocClient } from "../../util/ddbDocClient";
 import { useRouter } from "next/router";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import Link from "next/link";

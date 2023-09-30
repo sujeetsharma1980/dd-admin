@@ -1,5 +1,5 @@
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "../../config/ddbDocClient";
+import { ddbDocClient } from "../../util/ddbDocClient";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { v4 as uuidv4 } from 'uuid';

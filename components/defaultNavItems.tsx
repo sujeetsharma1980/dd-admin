@@ -4,6 +4,7 @@ import {
   DocumentPlusIcon,
   FolderIcon,
   HomeIcon,
+  SignalIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { NavItem } from "./Sidebar";
@@ -24,5 +25,10 @@ export const defaultNavItems: NavItem[] = [
     label: "Deals",
     href: "/deals/view",
     icon: <DocumentPlusIcon className="w-6 h-6" />,
+  },
+  {
+    label: "On Demand Deployment",
+    href: "/deploy",
+    icon: <SignalIcon className="w-6 h-6" />,
   },
 ];

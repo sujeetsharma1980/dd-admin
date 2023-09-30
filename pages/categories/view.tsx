@@ -1,6 +1,6 @@
 // Import required AWS SDK clients and commands for Node.js.
 import { useEffect, useState } from "react";
-import { ddbDocClient } from "../../config/ddbDocClient";
+import { ddbDocClient } from "../../util/ddbDocClient";
 import { ScanCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import Link from "next/link";
 import { PencilSquareIcon, XCircleIcon } from "@heroicons/react/24/outline";
