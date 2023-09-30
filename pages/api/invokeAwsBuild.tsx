@@ -1,5 +1,5 @@
-const awsBuildId = process.env.NEXT_PUBLIC_AWS_BUILD_ID
-const awsBuildToken = process.env.NEXT_PUBLIC_AWS_BUILD_TOKEN
+const awsBuildId = process.env.AWS_BUILD_ID
+const awsBuildToken = process.env.AWS_BUILD_TOKEN
 //   scanning the dynamodb table
 export default async (req, res) => {
 
