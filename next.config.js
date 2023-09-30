@@ -6,7 +6,7 @@ module.exports = {
   },
   trailingSlash: true,
   env: {
-    AWS_BUILD_ID: process.env.AWS_BUILD_ID,
-    AWS_BUILD_TOKEN:process.env.AWS_BUILD_TOKEN
+    BUILD_ID: process.env.BUILD_ID,
+    BUILD_TOKEN:process.env.BUILD_TOKEN
   }
 }

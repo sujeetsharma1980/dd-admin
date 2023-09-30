@@ -1,5 +1,5 @@
-const awsBuildId = process.env.AWS_BUILD_ID
-const awsBuildToken = process.env.AWS_BUILD_TOKEN
+const awsBuildId = process.env.BUILD_ID
+const awsBuildToken = process.env.BUILD_TOKEN
 //   scanning the dynamodb table
 export default async (req, res) => {
 
@@ -21,11 +21,11 @@ export default async (req, res) => {
         fetch(webHookUrl, requestMetadata)
             .then(res => res.json())
             .then(ress => {
-                res.status(200).send("Build started successfully..");
+                res.status(200).send("Build started successfully.."+ JSON.stringify(ress));
             });
         
     } catch (error) {
         console.log(error);
-        res.status(500).send("Error starting build..");
+        res.status(500).send("Error starting build.."+ JSON.stringify(error));
     }
 };
