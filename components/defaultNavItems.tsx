@@ -4,6 +4,7 @@ import {
   DocumentPlusIcon,
   FolderIcon,
   HomeIcon,
+  PencilIcon,
   SignalIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
@@ -27,8 +28,18 @@ export const defaultNavItems: NavItem[] = [
     icon: <DocumentPlusIcon className="w-6 h-6" />,
   },
   {
+    label: "Blogs",
+    href: "/blogs/view",
+    icon: <DocumentPlusIcon className="w-6 h-6" />,
+  },
+  {
     label: "On Demand Deployment",
     href: "/deploy",
     icon: <SignalIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Privacy",
+    href: "/privacy",
+    icon: <PencilIcon className="w-6 h-6" />,
   },
 ];

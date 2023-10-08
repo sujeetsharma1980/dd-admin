@@ -7,3 +7,10 @@
     background-color: #047d95!important;
     background-image: none;
 }
+.w-md-editor {
+    height: 95%!important;
+}
+
+.w-md-editor-content {
+    height: 95%!important;
+}
