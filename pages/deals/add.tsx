@@ -83,15 +83,29 @@ const AddData = () => {
 
     console.log(params)
 
+    const getParams = {
+      TableName: 'Deals',
+      Key: {
+        pk: "P#" + event.target.textLink.value, //uuidv4(),
+        sk: "METADATA",
+      }
+    }
+
     try {
-      const data = await ddbDocClient.send(new PutCommand(params));
-      console.log("Success - item added", data);
-      alert("Data Added Successfully");
-      router.push("/deals/view");
-      //@ts-ignore
-      document.getElementById("addData-form").reset();
+      const getData = await ddbDocClient.send(new ScanCommand(getParams));
+      if (getData?.Items?.length > 0) {
+        alert("Deal already exists");
+      } else {
+        const data = await ddbDocClient.send(new PutCommand(params));
+        console.log("Success - item added", data);
+        alert("Data Added Successfully");
+        router.push("/deals/view");
+        //@ts-ignore
+        document.getElementById("addData-form").reset();
+      }
     } catch (err: any) {
       console.log("Error", err.stack);
+      alert("Error occured" + JSON.stringify(err));
     }
   };
   return (
