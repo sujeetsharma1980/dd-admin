@@ -65,7 +65,7 @@ const AddData = () => {
     const params = {
       TableName: "Deals",
       Item: {
-        pk: "P#" + event.target.textLink.value, //uuidv4(),
+        pk: "P#" + event.target.textLink.value.trim(), //uuidv4(),
         sk: "METADATA",
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
@@ -85,9 +85,10 @@ const AddData = () => {
 
     const getParams = {
       TableName: 'Deals',
-      Key: {
-        pk: "P#" + event.target.textLink.value, //uuidv4(),
-        sk: "METADATA",
+      FilterExpression: '(pk = :prefix and sk = :meta)',
+      ExpressionAttributeValues: {
+        ':prefix': "P#" + event.target.textLink.value.trim(),
+        ':meta': "METADATA"
       }
     }
 

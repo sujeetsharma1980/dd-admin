@@ -19,7 +19,7 @@ const AddData = () => {
       TableName: "Deals",
       Item: {
         pk: "BRANDS",
-        sk: "B#" + event.target.brandname.value, //uuidv4(),
+        sk: "B#" + event.target.brandname.value.trim(), //uuidv4(),
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
         brandname: event.target.brandname.value,
@@ -29,11 +29,13 @@ const AddData = () => {
       },
     };
 
+    
     const getParams = {
       TableName: 'Deals',
-      Key: {
-        pk: "BRANDS",
-        sk: "B#" + event.target.brandname.value,
+      FilterExpression: '(pk = :prefix and sk = :meta)',
+      ExpressionAttributeValues: {
+        ':prefix': 'BRANDS',
+        ':meta': "B#" + event.target.brandname.value.trim()
       }
     }
 

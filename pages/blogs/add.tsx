@@ -33,7 +33,7 @@ const AddData = () => {
     const putParams = {
       TableName: "Deals",
       Item: {
-        pk: "BLOG#" + event.target.slug.value, //uuidv4(),
+        pk: "BLOG#" + event.target.slug.value.trim(), //uuidv4(),
         sk: "METADATA",
         dateAdded: new Date().toLocaleString(),
         published_at: (event.target.blogstatus.value === 'published' ? new Date().toLocaleString() : ""),
@@ -49,15 +49,17 @@ const AddData = () => {
 
     const getParams = {
       TableName: 'Deals',
-      Key: {
-        pk: "BLOG#" + event.target.slug.value,
-        sk: "METADATA",
+      FilterExpression: '(pk = :prefix and sk = :meta)',
+        ExpressionAttributeValues: {
+          ':prefix': 'BLOG#' + event.target.slug.value.trim(),
+          ':meta': 'METADATA'
       }
     }
    
     try {
       const getData = await ddbDocClient.send(new ScanCommand(getParams));
       if(getData?.Items?.length > 0) {
+        //console.log(JSON.stringify(getData));
         alert("Blog Already exists");
       } else {
         const data = await ddbDocClient.send(new PutCommand(putParams));
