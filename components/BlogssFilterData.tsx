@@ -11,10 +11,7 @@ const BlogsFilterData = ({ data, deleteItem }) => {
             if (
                 item.title.toLowerCase().includes(value.toLowerCase()) ||
                 item.longDesc.toLowerCase().includes(value.toLowerCase()) ||
-                item.image.toLowerCase().includes(value.toLowerCase()) ||
-                item.slug.toLowerCase().includes(value.toLowerCase()) ||
-                item.tag.toLowerCase().includes(value.toLowerCase()) ||
-                item.status.toLowerCase().includes(value.toLowerCase())
+                item.tag.toLowerCase().includes(value.toLowerCase())
             ) {
                 return true;
             }
