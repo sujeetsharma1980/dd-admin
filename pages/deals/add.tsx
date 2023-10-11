@@ -161,19 +161,19 @@ const AddData = () => {
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
-              <select className={styles.inputField} id="brandname">
+              <select className={styles.inputField} id="brandname" required>
                 {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="storename" className="form-label inline-block mb-2 text-gray-700">Store</label>
-              <select className={styles.inputField} id="storename">
+              <select className={styles.inputField} id="storename" required>
                 {storesData.map((store) => <option value={store.sk} key={store.sk}>{store.storename}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-              <select className={styles.inputField} id="category">
+              <select className={styles.inputField} id="category" required>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
               </select>
             </div>

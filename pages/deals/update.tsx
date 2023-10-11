@@ -145,21 +145,21 @@ const UpdateData = () => {
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
-              <select className={styles.inputField} id="brandname">
+              <select className={styles.inputField} id="brandname" required>
               <option value='' key='blank'></option>
                 {brandsData.map((brand) => <option value={brand.sk} key={brand.sk} selected={brand.sk === data.brandname}>{brand.brandname}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="storename" className="form-label inline-block mb-2 text-gray-700">Store</label>
-              <select className={styles.inputField} id="storename">
+              <select className={styles.inputField} id="storename" required>
                 <option value='' key='blank'></option>
                 {storesData.map((store) => <option value={store.sk} key={store.sk} selected={store.sk === data.storename}>{store.storename}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-              <select className={styles.inputField} id="category">
+              <select className={styles.inputField} id="category" required>
               <option value='' key='blank'></option>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
               </select>
