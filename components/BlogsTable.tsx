@@ -44,6 +44,11 @@ const BlogsTable = (props) => {
                 Tag
               </button>
             </th>
+            <th className={styles.thbackgroundcolordarkgray}>
+              <button type="button" onClick={() => requestSort("category")} className={`${styles.theadbtn} ${getClassNamesFor("category")}`}>
+                Category
+              </button>
+            </th>
             <th className={styles.thbackgroundcolorlightgray}>
               <button type="button" onClick={() => requestSort("dateAdded")} className={`${styles.theadbtn} ${getClassNamesFor("dateAdded")}`}>
                 Date Added
@@ -81,6 +86,7 @@ const BlogsTable = (props) => {
                 </td>
                 <td className={styles.tabledata}>{item.title}</td>
                 <td className={styles.tabledata}>{item.tag}</td>
+                <td className={styles.tabledata}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
                 <td className={styles.tabledata}>{item.dateAdded}</td>
                 <td className={styles.tabledata}>{item.dateModified}</td>
                 <td className={styles.tabledata}>{item.blogstatus}</td>
@@ -92,6 +98,7 @@ const BlogsTable = (props) => {
                         pk: item.pk,
                         sk: item.sk,
                         dateAdded: item.dateAdded,
+                        category: item.category,
                         title: item.title,
                         tag: item.tag,
                         slug: item.slug,

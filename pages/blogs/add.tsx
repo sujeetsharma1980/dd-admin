@@ -21,8 +21,27 @@ const AddData = () => {
   const router = useRouter();
 
   const [longDescvalue, setLongDescvalue] = useState("");
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  const getCategories = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'CATEGORIES'
+        }
+      }
+      const cdata = await ddbDocClient.send(new ScanCommand(params));
+      setCategoriesData(cdata.Items);
+      console.log("cdata", cdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   useEffect(() => {
+    getCategories();
   }, []);
 
   const handleSubmit = async (event: any) => {
@@ -39,6 +58,7 @@ const AddData = () => {
         published_at: (event.target.blogstatus.value === 'published' ? new Date().toLocaleString() : ""),
         dateModified: "",
         title: event.target.title.value,
+        category: event.target.category.value,
         slug: event.target.slug.value,
         longDesc: longDescvalue,
         image: event.target.image.value,
@@ -122,6 +142,12 @@ const AddData = () => {
             <div className="form-group mb-6">
               <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">Tag</label>
               <input type="text" className={styles.inputField} id="tag" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
+              <select className={styles.inputField} id="category">
+                {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
+              </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="blogstatus" className="form-label inline-block mb-2 text-gray-700">Status</label>

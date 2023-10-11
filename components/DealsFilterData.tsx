@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DealsTable from "./DealsTable";
 import styles from "./DataTable.module.scss";
 
-const DealsFilterData = ({ data, brandsData, categoriesData, deleteItem }) => {
+const DealsFilterData = ({ data, brandsData, categoriesData, storesData, deleteItem }) => {
     const [filteredData, setFilteredData] = useState("");
 
     function filteration(data, value) {
@@ -14,7 +14,8 @@ const DealsFilterData = ({ data, brandsData, categoriesData, deleteItem }) => {
                 item.image.toLowerCase().includes(value.toLowerCase()) ||
                 item.listprice.toLowerCase().includes(value.toLowerCase()) ||
                 item.dealprice.toLowerCase().includes(value.toLowerCase()) ||
-                item.dealsource.toLowerCase().includes(value.toLowerCase()) ||
+                item.storename.toLowerCase().includes(value.toLowerCase()) ||
+                item.brandname.toLowerCase().includes(value.toLowerCase()) ||
                 item.category.toLowerCase().includes(value.toLowerCase()) ||
                 item.dateAdded.toLowerCase().includes(value.toLowerCase()) ||
                 item.dateModified.toLowerCase().includes(value.toLowerCase()) ||
@@ -38,7 +39,7 @@ const DealsFilterData = ({ data, brandsData, categoriesData, deleteItem }) => {
                     onChange={(e) => setFilteredData(e.target.value)}
                 />
             </div>
-            <DealsTable data={filteration(data, filteredData)} brandsData={brandsData} categoriesData={categoriesData} deleteItem={deleteItem} />
+            <DealsTable data={filteration(data, filteredData)} brandsData={brandsData} storesData={storesData} categoriesData={categoriesData} deleteItem={deleteItem} />
         </>
     );
 };

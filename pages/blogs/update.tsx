@@ -2,7 +2,7 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import { ddbDocClient } from "../../util/ddbDocClient";
 import { useRouter } from "next/router";
-import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -23,9 +23,28 @@ const UpdateData = () => {
   const data = router.query;
 
   const [longDescvalue, setLongDescvalue] = useState("");
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  const getCategories = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'CATEGORIES'
+        }
+      }
+      const cdata = await ddbDocClient.send(new ScanCommand(params));
+      setCategoriesData(cdata.Items);
+      console.log("cdata", cdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
  
   
   useEffect(() => {
+    getCategories()
      //@ts-ignore
     setLongDescvalue(data.longDesc);
   }, []);
@@ -42,9 +61,10 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set title = :p, slug = :r, longDesc = :q, blogstatus = :z, image = :l, listprice = :m, tag = :m, published_at = :n, dateModified = :k",
+        "set title = :p, slug = :r, category = :o, longDesc = :q, blogstatus = :z, image = :l, listprice = :m, tag = :m, published_at = :n, dateModified = :k",
       ExpressionAttributeValues: {
         ":p": event.target.title.value,
+        ":o": event.target.category.value,
         ":r": event.target.slug.value,
         ":q": longDescvalue,
         ":z": event.target.blogstatus.value,
@@ -113,6 +133,13 @@ const UpdateData = () => {
             <div className="form-group mb-6">
               <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">Tag</label>
               <input type="text" className={styles.inputField} id="tag" name="tag" defaultValue={data.tag} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
+              <select className={styles.inputField} id="category">
+              <option value='' key='blank'></option>
+                {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
+              </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="blogstatus" className="form-label inline-block mb-2 text-gray-700">Status</label>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./DataTable.module.scss";
 import BlogsTable from "./BlogsTable";
 
-const BlogsFilterData = ({ data, deleteItem }) => {
+const BlogsFilterData = ({ data, deleteItem, categoriesData }) => {
     const [filteredData, setFilteredData] = useState("");
 
     function filteration(data, value) {
@@ -31,7 +31,7 @@ const BlogsFilterData = ({ data, deleteItem }) => {
                     onChange={(e) => setFilteredData(e.target.value)}
                 />
             </div>
-            <BlogsTable data={filteration(data, filteredData)} deleteItem={deleteItem} />
+            <BlogsTable data={filteration(data, filteredData)} deleteItem={deleteItem} categoriesData={categoriesData}/>
         </>
     );
 };

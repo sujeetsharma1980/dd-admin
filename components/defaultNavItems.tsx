@@ -18,6 +18,11 @@ export const defaultNavItems: NavItem[] = [
     icon: <DocumentPlusIcon className="w-6 h-6" />,
   },
   {
+    label: "Stores",
+    href: "/stores/view",
+    icon: <DocumentPlusIcon className="w-6 h-6" />,
+  },
+  {
     label: "Categories",
     href: "/categories/view",
     icon: <DocumentPlusIcon className="w-6 h-6" />,

@@ -50,8 +50,13 @@ const DealsTable = (props) => {
               </button>
             </th>
             <th className={styles.thbackgroundcolorlightgray}>
-              <button type="button" onClick={() => requestSort("source")} className={`${styles.theadbtn} ${getClassNamesFor("source")}`}>
-                Source
+              <button type="button" onClick={() => requestSort("brandname")} className={`${styles.theadbtn} ${getClassNamesFor("brandname")}`}>
+                Brand
+              </button>
+            </th>
+            <th className={styles.thbackgroundcolorlightgray}>
+              <button type="button" onClick={() => requestSort("store")} className={`${styles.theadbtn} ${getClassNamesFor("store")}`}>
+                Store
               </button>
             </th>
             <th className={styles.thbackgroundcolordarkgray}>
@@ -105,7 +110,8 @@ const DealsTable = (props) => {
                 </td>
                 <td className={styles.tabledata}>{item.listprice}</td>
                 <td className={styles.tabledata}>{item.dealprice}</td>
-                <td className={styles.tabledata}>{(props.brandsData.find(brand => brand.sk === item.dealsource))?.brandname}</td>
+                <td className={styles.tabledata}>{(props.brandsData.find(brand => brand.sk === item.brandname))?.brandname}</td>
+                <td className={styles.tabledata}>{(props.storesData.find(store => store.sk === item.storename))?.storename}</td>
                 <td className={styles.tabledata}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
                 <td className={styles.tabledata}>{item.dateAdded}</td>
                 <td className={styles.tabledata}>{item.dateModified}</td>
@@ -119,8 +125,9 @@ const DealsTable = (props) => {
                         pk: item.pk,
                         sk: item.sk,
                         dateAdded: item.dateAdded,
-                        dealsource: item.dealsource,
+                        brandname: item.brandname,
                         category: item.category,
+                        storename: item.storename,
                         image: item.image,
                         textLink: item.textLink,
                         description: item.description,

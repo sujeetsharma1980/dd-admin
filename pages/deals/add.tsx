@@ -14,14 +14,35 @@ const AddData = () => {
   const router = useRouter();
 
   const [brandsData, setBrandsData] = useState([]);
+  const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {
     getBrands();
+    getStores();
     getCategories();
   }, []);
 
-  //   scanning the dynamodb table
+
+  //   scanning the dynamodb table for Stores
+  const getStores = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'STORES'
+        }
+      }
+      const sdata = await ddbDocClient.send(new ScanCommand(params));
+      setStoresData(sdata.Items);
+      console.log("bdata", sdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
+  //   scanning the dynamodb table for Brands
   const getBrands = async () => {
     try {
       const params = {
@@ -39,7 +60,7 @@ const AddData = () => {
     }
   };
 
-  //   scanning the dynamodb table
+  //   scanning the dynamodb table for Categories
   const getCategories = async () => {
     try {
       const params = {
@@ -69,8 +90,9 @@ const AddData = () => {
         sk: "METADATA",
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
-        dealsource: event.target.dealsource.value,
+        brandname: event.target.brandname.value,
         category: event.target.category.value,
+        storename: event.target.storename.value,
         image: event.target.image.value,
         textLink: event.target.textLink.value,
         description: event.target.description.value,
@@ -138,9 +160,15 @@ const AddData = () => {
         <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
-              <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Brand</label>
-              <select className={styles.inputField} id="dealsource">
+              <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
+              <select className={styles.inputField} id="brandname">
                 {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="storename" className="form-label inline-block mb-2 text-gray-700">Store</label>
+              <select className={styles.inputField} id="storename">
+                {storesData.map((store) => <option value={store.sk} key={store.sk}>{store.storename}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">

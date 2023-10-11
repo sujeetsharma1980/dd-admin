@@ -14,13 +14,32 @@ const UpdateData = () => {
   const data = router.query;
 
   const [brandsData, setBrandsData] = useState([]);
+  const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {
+    getStores();
     getBrands();
     getCategories();
   }, []);
 
+  //   scanning the dynamodb table for Stores
+  const getStores = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'STORES'
+        }
+      }
+      const sdata = await ddbDocClient.send(new ScanCommand(params));
+      setStoresData(sdata.Items);
+      console.log("sdata", sdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
   //   scanning the dynamodb table
   const getBrands = async () => {
     try {
@@ -69,10 +88,11 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set dealsource = :p, category = :r, image = :q, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
+        "set brandname = :p, category = :r, storename = :s, image = :q, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
       ExpressionAttributeValues: {
-        ":p": event.target.dealsource.value,
+        ":p": event.target.brandname.value,
         ":r": event.target.category.value,
+        ":s": event.target.storename.value,
         ":q": event.target.image.value,
         ":z": event.target.textLink.value,
         ":l": event.target.description.value,
@@ -124,15 +144,24 @@ const UpdateData = () => {
         <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
-              <label htmlFor="dealsource" className="form-label inline-block mb-2 text-gray-700">Brand</label>
-              <select className={styles.inputField} id="dealsource" value={data.dealsource}>
-                {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
+              <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
+              <select className={styles.inputField} id="brandname">
+              <option value='' key='blank'></option>
+                {brandsData.map((brand) => <option value={brand.sk} key={brand.sk} selected={brand.sk === data.brandname}>{brand.brandname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="storename" className="form-label inline-block mb-2 text-gray-700">Store</label>
+              <select className={styles.inputField} id="storename">
+                <option value='' key='blank'></option>
+                {storesData.map((store) => <option value={store.sk} key={store.sk} selected={store.sk === data.storename}>{store.storename}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-              <select className={styles.inputField} id="category" value={data.category}>
-                {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
+              <select className={styles.inputField} id="category">
+              <option value='' key='blank'></option>
+                {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">

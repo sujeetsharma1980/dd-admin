@@ -17,12 +17,31 @@ const ViewData = () => {
   const [tableData, setTableData] = useState([]);
 
   const [brandsData, setBrandsData] = useState([]);
+  const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {
     getBrands();
     getCategories();
+    getStores();
   }, []);
+
+  const getStores = async () => {
+    try {
+      const params = {
+        TableName: 'Deals',
+        FilterExpression: 'begins_with(pk, :prefix)',
+        ExpressionAttributeValues: {
+          ':prefix': 'STORES'
+        }
+      }
+      const sdata = await ddbDocClient.send(new ScanCommand(params));
+      setStoresData(sdata.Items);
+      console.log("sdata", sdata.Items);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   //   scanning the dynamodb table
   const getBrands = async () => {
@@ -136,7 +155,7 @@ const ViewData = () => {
         </div>
         <p className="text-3xl">Deals</p>
         <div className="w-11/12">
-              <DealsFilterData data={tableData} brandsData={brandsData} categoriesData={categoriesData} deleteItem={deleteItem}/>
+              <DealsFilterData data={tableData} brandsData={brandsData} storesData={storesData} categoriesData={categoriesData} deleteItem={deleteItem}/>
         </div>
       </div>
     </>
