@@ -43,6 +43,11 @@ export const defaultNavItems: NavItem[] = [
     icon: <SignalIcon className="w-6 h-6" />,
   },
   {
+    label: "Bulk Upload",
+    href: "/dealsbulkupload",
+    icon: <SignalIcon className="w-6 h-6" />,
+  },
+  {
     label: "Privacy",
     href: "/privacy",
     icon: <PencilIcon className="w-6 h-6" />,

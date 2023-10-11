@@ -28,6 +28,7 @@
     "next": "^13.4.19",
     "next-remove-imports": "^1.0.12",
     "node-sass": "6.0.1",
+    "papaparse": "^5.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-paginate": "^8.2.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "20.7.0",
+    "@types/papaparse": "^5.3.9",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.0.9",
     "@types/uuid": "^9.0.4",
