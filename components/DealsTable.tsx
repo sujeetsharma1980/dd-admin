@@ -101,23 +101,23 @@ const DealsTable = (props) => {
           ) : (
             items.slice(offset, offset + PER_PAGE).map((item, index) => (
               <tr key={index} className={styles.tablerow}>
-                <td className={styles.tabledata}>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>
                   <Link target='_blank' href={item.textLink}>{item.textLink}</Link>
                   <div>{item.description}</div>
                 </td>
-                <td className={styles.tabledata}>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>
                   <img src={item.image} className={styles.imgclass}/>
                 </td>
-                <td className={styles.tabledata}>{item.listprice}</td>
-                <td className={styles.tabledata}>{item.dealprice}</td>
-                <td className={styles.tabledata}>{(props.brandsData.find(brand => brand.sk === item.brandname))?.brandname}</td>
-                <td className={styles.tabledata}>{(props.storesData.find(store => store.sk === item.storename))?.storename}</td>
-                <td className={styles.tabledata}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
-                <td className={styles.tabledata}>{item.dateAdded}</td>
-                <td className={styles.tabledata}>{item.dateModified}</td>
-                <td className={styles.tabledata}>{item.expiredon}</td>
-                <td className={styles.tabledata}>{item.deleted}</td>
-                <td className={styles.tableactiondata}>
+                <td className={styles.tabledata + ' text-sm font-medium'}>{item.listprice}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dealprice}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.brandsData.find(brand => brand.sk === item.brandname))?.brandname}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.storesData.find(store => store.sk === item.storename))?.storename}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateAdded}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateModified}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.expiredon}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.deleted}</td>
+                <td className={styles.tableactiondata+ ' text-sm font-medium'}>
                   <Link
                     href={{
                       pathname: "/deals/update",
