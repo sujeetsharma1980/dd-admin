@@ -164,9 +164,10 @@ function DealsBulkUpload() {
     }
 
     try {
-      const getData = await ddbDocClient.send(new ScanCommand(getParams));
+     const getData = await ddbDocClient.send(new ScanCommand(getParams));
       if (getData?.Items?.length > 0) {
-        return deal.description + ' already exits'
+        const data = await ddbDocClient.send(new PutCommand(params));
+        return deal.description + ' already exits. Overwritten';
       } else {
         const data = await ddbDocClient.send(new PutCommand(params));
         return deal.description + ' added successfully'
