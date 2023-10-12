@@ -25,11 +25,13 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set categoryname = :p, lob = :r, image = :q, dateModified = :k, deleted = :o",
+        "set categoryname = :p, lob = :r, image = :q, dateModified = :k, deleted = :o, showinnavigation = :t,showonhomepage = :s ",
       ExpressionAttributeValues: {
         ":p": event.target.categoryname.value,
         ":r": event.target.lob.value,
         ":q": event.target.image.value,
+        ":s": event.target.showonhomepage.value,
+        ":t": event.target.showinnavigation.value,
         ":o": event.target.deleted.value,
         ":k": new Date().toLocaleString()
       },
@@ -91,6 +93,20 @@ const UpdateData = () => {
               <select className={styles.inputField} id="deleted" defaultValue={data.deleted}>
                 <option value='y' key='y'>y</option>
                 <option value='n' key='n'>n</option>
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="showonhomepage" className="form-label inline-block mb-2 text-gray-700">Show on homepage</label>
+              <select className={styles.inputField} id="showonhomepage" defaultValue={data.showonhomepage}>
+                <option value="n" key="n">N</option>
+                <option value="y" key="y">Y</option>
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="showinnavigation" className="form-label inline-block mb-2 text-gray-700">Show in navigation</label>
+              <select className={styles.inputField} id="showinnavigation" defaultValue={data.showinnavigation}>
+                <option value="y" key="y">Y</option>
+                <option value="n" key="n">N</option>
               </select>
             </div>
 

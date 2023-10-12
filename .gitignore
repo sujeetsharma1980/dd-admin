@@ -10,3 +10,4 @@ public/*.*
 .env.production.local
 out/*.*
 out/
+.DS_Store

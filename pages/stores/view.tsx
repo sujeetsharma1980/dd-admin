@@ -103,6 +103,8 @@ const ViewData = () => {
                       <th scope="col" className={Styles.tableHeadings}>Text Image</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Added</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Modified</th>
+                      <th scope="col" className={Styles.tableHeadings}>Show on Homepage</th>
+                      <th scope="col" className={Styles.tableHeadings}>Show in Navigation</th>
                       <th scope="col" className={Styles.tableHeadings}>Soft Deleted</th>
                       <th
                         scope="col"
@@ -120,6 +122,8 @@ const ViewData = () => {
                         <td className={Styles.tableData}>{item.image}</td>
                         <td className={Styles.tableData}>{item.dateAdded}</td>
                         <td className={Styles.tableData}>{item.dateModified}</td>
+                        <td className={Styles.tableData}>{item.showonhomepage}</td>
+                        <td className={Styles.tableData}>{item.showinnavigation}</td>
                         <td className={Styles.tableData}>{item.deleted}</td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
                           <Link
@@ -133,6 +137,8 @@ const ViewData = () => {
                                 image: item.image,
                                 dateAdded: item.dateAdded,
                                 dateModified: item.dateModified,
+                                showonhomepage: item.showonhomepage,
+                                showinnavigation: item.showinnavigation,
                                 deleted: item.deleted
                               },
                             }}

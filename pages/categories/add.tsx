@@ -26,7 +26,9 @@ const AddData = () => {
         categoryname: event.target.categoryname.value,
         lob: event.target.lob.value,
         image: event.target.image.value,
-        deleted: "n"
+        deleted: "n",
+        showonhomepage: event.target.showonhomepage.value,
+        showinnavigation: event.target.showinnavigation.value
       },
     };
 
@@ -97,6 +99,20 @@ const AddData = () => {
             <div className="form-group mb-6">
               <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
               <input type="text" className={styles.inputField} id="image" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="showonhomepage" className="form-label inline-block mb-2 text-gray-700">Show on homepage</label>
+              <select className={styles.inputField} id="showonhomepage" required>
+                <option value="n" key="n">N</option>
+                <option value="y" key="y">Y</option>
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="showinnavigation" className="form-label inline-block mb-2 text-gray-700">Show in navigation</label>
+              <select className={styles.inputField} id="showinnavigation" required>
+                <option value="n" key="n">N</option>
+                <option value="y" key="y">Y</option>
+              </select>
             </div>
 
             <button type="submit" className="
