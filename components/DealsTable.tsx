@@ -17,7 +17,7 @@ const DealsTable = (props) => {
   };
 
   // Pagination
-  const PER_PAGE = 5;
+  const PER_PAGE = 50;
   const pageCount = Math.ceil(items.length / PER_PAGE);
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);

@@ -23,10 +23,14 @@
   
   td, th {
     border: 1px solid #dddddd;
-    text-align: left;
-
+    text-align: center;
   }
   
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+
+  .scrollit {
+    overflow:scroll;
+    max-height:500px;
+}

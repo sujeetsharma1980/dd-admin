@@ -7,8 +7,8 @@ import { PencilSquareIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 const Styles = {
   tableHeadings:
-    "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
-  tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
+    "text-sm font-medium text-gray-900 px-2 py-2 text-left border-2",
+  tableData: "text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap",
 };
 
 const ViewData = () => {
@@ -94,7 +94,7 @@ const ViewData = () => {
         <div className="flex flex-col py-10">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="overflow-hidden bg-white">
+              <div className="scrollit bg-white">
                 <table className="min-w-full">
                   <thead className="border-b">
                     <tr>
@@ -108,14 +108,14 @@ const ViewData = () => {
                       <th scope="col" className={Styles.tableHeadings}>Soft Deleted</th>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-gray-900 px-6 py-4 text-center border-2"
+                        className="text-sm font-medium text-gray-900 px-2 py-2 text-center border-2"
                       >Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {tableData.map((item: any) => (
                       <tr className="border-b" key={item.sk}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                           {item.storename}
                         </td>
                         <td className={Styles.tableData}>{item.lob}</td>
@@ -125,7 +125,7 @@ const ViewData = () => {
                         <td className={Styles.tableData}>{item.showonhomepage}</td>
                         <td className={Styles.tableData}>{item.showinnavigation}</td>
                         <td className={Styles.tableData}>{item.deleted}</td>
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                        <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap text-center">
                           <Link
                             href={{
                               pathname: "/stores/update",

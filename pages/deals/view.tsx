@@ -154,7 +154,7 @@ const ViewData = () => {
           </Link>
         </div>
         <p className="text-3xl">Deals</p>
-        <div className="w-11/12">
+        <div className="w-11/12 scrollit">
               <DealsFilterData data={tableData} brandsData={brandsData} storesData={storesData} categoriesData={categoriesData} deleteItem={deleteItem}/>
         </div>
       </div>

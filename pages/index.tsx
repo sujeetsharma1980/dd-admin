@@ -2,8 +2,8 @@
 
 const Styles = {
   tableHeadings:
-    "text-sm font-medium text-gray-900 px-6 py-4 text-left border-2",
-  tableData: "text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap",
+    "text-sm font-medium text-gray-900 px-2 py-2 text-left border-2",
+  tableData: "text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap",
 };
 
 const ViewData = () => {
