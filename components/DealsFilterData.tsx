@@ -10,6 +10,8 @@ const DealsFilterData = ({ data, brandsData, categoriesData, storesData, deleteI
             if (!value) return true;
             if (
                 item.textLink.toLowerCase().includes(value.toLowerCase()) ||
+                item.title.toLowerCase().includes(value.toLowerCase()) ||
+                item.submittedby.toLowerCase().includes(value.toLowerCase()) ||
                 item.description.toLowerCase().includes(value.toLowerCase()) ||
                 item.image.toLowerCase().includes(value.toLowerCase()) ||
                 item.listprice.toLowerCase().includes(value.toLowerCase()) ||

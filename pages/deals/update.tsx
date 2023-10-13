@@ -88,16 +88,18 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set brandname = :p, category = :r, storename = :s, image = :q, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
+        "set brandname = :p, category = :r, storename = :s, image = :q, title = :t, submittedby = :x, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
       ExpressionAttributeValues: {
         ":p": event.target.brandname.value,
         ":r": event.target.category.value,
         ":s": event.target.storename.value,
         ":q": event.target.image.value,
         ":z": event.target.textLink.value,
+        ":t": event.target.title.value,
         ":l": event.target.description.value,
         ":m": event.target.listprice.value,
         ":n": event.target.dealprice.value,
+        ":x": event.target.submittedby.value,
         ":o": event.target.deleted.value,
         ":y": event.target.expiredon.value,
         ":k": new Date().toLocaleString()
@@ -143,6 +145,30 @@ const UpdateData = () => {
         <p className="text-3xl mb-20">Update Deals</p>
         <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
+          <div className="form-group mb-6">
+              <label htmlFor="title" className="form-label inline-block mb-2 text-gray-700">Title</label>
+              <input type="text" className={styles.inputField} id="title" name="title" defaultValue={data.title} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
+              <textarea className={styles.inputField} id="description" name="description" defaultValue={data.description} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
+              <input type="text" className={styles.inputField} id="image" name="image" defaultValue={data.image} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Deal Link</label>
+              <input type="text" className={styles.inputField} id="textLink" name="textLink" defaultValue={data.textLink} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
+              <input type="text" className={styles.inputField} id="listprice" name="listprice" defaultValue={data.listprice} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
+              <input type="text" className={styles.inputField} id="dealprice" name="dealprice" defaultValue={data.dealprice} />
+            </div>
             <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
               <select className={styles.inputField} id="brandname" required>
@@ -165,22 +191,6 @@ const UpdateData = () => {
               </select>
             </div>
             <div className="form-group mb-6">
-              <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
-              <input type="text" className={styles.inputField} id="image" name="image" defaultValue={data.image} />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Deal Link</label>
-              <input type="text" className={styles.inputField} id="textLink" name="textLink" defaultValue={data.textLink} />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
-              <textarea className={styles.inputField} id="description" name="description" defaultValue={data.description} />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
-              <input type="text" className={styles.inputField} id="listprice" name="listprice" defaultValue={data.listprice} />
-            </div>
-            <div className="form-group mb-6">
               <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
               <input type="text" className={styles.inputField} id="dealprice" name="dealprice" defaultValue={data.dealprice} />
             </div>
@@ -190,6 +200,10 @@ const UpdateData = () => {
                 <option value='y' key='y'>y</option>
                 <option value='n' key='n'>n</option>
               </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="submittedby" className="form-label inline-block mb-2 text-gray-700">Submitted By</label>
+              <input type="text" className={styles.inputField} id="submittedby" name="submittedby" defaultValue={data.submittedby} />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="expiredon" className="form-label inline-block mb-2 text-gray-700">Expired On</label>

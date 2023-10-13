@@ -31,7 +31,7 @@ const DealsTable = (props) => {
           <tr>
             <th className={styles.thbackgroundcolordarkgray}>
               <button type="button" onClick={() => requestSort("description")} className={`${styles.theadbtn} ${getClassNamesFor("description")}`}>
-                Deal Link & Description
+                Title & link
               </button>
             </th>
             <th className={styles.thbackgroundcolordarkgray}>
@@ -103,7 +103,7 @@ const DealsTable = (props) => {
               <tr key={index} className={styles.tablerow}>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>
                   <Link target='_blank' href={item.textLink}>{item.textLink}</Link>
-                  <div>{item.description}</div>
+                  <div>{item.title}</div>
                 </td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>
                   <img src={item.image} className={styles.imgclass}/>
@@ -124,6 +124,7 @@ const DealsTable = (props) => {
                       query: {
                         pk: item.pk,
                         sk: item.sk,
+                        title: item.title,
                         dateAdded: item.dateAdded,
                         brandname: item.brandname,
                         category: item.category,
@@ -133,6 +134,7 @@ const DealsTable = (props) => {
                         description: item.description,
                         listprice: item.listprice,
                         dealprice: item.dealprice,
+                        submittedby: item.submittedby,
                         deleted: item.deleted,
                         expiredon: item.expiredon
                       },

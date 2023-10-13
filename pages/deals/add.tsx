@@ -90,14 +90,16 @@ const AddData = () => {
         sk: "METADATA",
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
+        title: event.target.title.value,
+        description: event.target.description.value,
+        image: event.target.image.value,
+        textLink: event.target.textLink.value,
+        listprice: event.target.listprice.value,
+        dealprice: event.target.dealprice.value,
         brandname: event.target.brandname.value,
         category: event.target.category.value,
         storename: event.target.storename.value,
-        image: event.target.image.value,
-        textLink: event.target.textLink.value,
-        description: event.target.description.value,
-        listprice: event.target.listprice.value,
-        dealprice: event.target.dealprice.value,
+        submittedby: event.target.submittedby.value,
         expiredon: event.target.expiredon.value,
         deleted: "n"
       },
@@ -160,6 +162,30 @@ const AddData = () => {
         <div className="block p-6 rounded-lg shadow-lg bg-white w-2/3 justify-self-center">
           <form onSubmit={handleSubmit} id="addData-form">
             <div className="form-group mb-6">
+                <label htmlFor="title" className="form-label inline-block mb-2 text-gray-700">Title</label>
+                <input type="text" className={styles.inputField} id="title" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
+              <textarea className={styles.inputField} id="description" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
+              <input type="text" className={styles.inputField} id="image" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Deal Link</label>
+              <input type="text" className={styles.inputField} id="textLink" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
+              <input type="text" className={styles.inputField} id="listprice" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
+              <input type="text" className={styles.inputField} id="dealprice" />
+            </div>
+            <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
               <select className={styles.inputField} id="brandname" required>
                 {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
@@ -178,24 +204,8 @@ const AddData = () => {
               </select>
             </div>
             <div className="form-group mb-6">
-              <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
-              <input type="text" className={styles.inputField} id="image" />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="textLink" className="form-label inline-block mb-2 text-gray-700">Deal   Link</label>
-              <input type="text" className={styles.inputField} id="textLink" />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
-              <textarea className={styles.inputField} id="description" />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="listprice" className="form-label inline-block mb-2 text-gray-700">List Price</label>
-              <input type="text" className={styles.inputField} id="listprice" />
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
-              <input type="text" className={styles.inputField} id="dealprice" />
+                <label htmlFor="submittedby" className="form-label inline-block mb-2 text-gray-700">Submitted By</label>
+                <input type="text" className={styles.inputField} id="submittedby" />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="expiredon" className="form-label inline-block mb-2 text-gray-700">Expired On</label>
