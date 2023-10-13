@@ -34,9 +34,9 @@ const AddData = () => {
       }
       const cdata = await ddbDocClient.send(new ScanCommand(params));
       setCategoriesData(cdata.Items);
-      console.log("cdata", cdata.Items);
+      //console.log("cdata", cdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -83,7 +83,7 @@ const AddData = () => {
         alert("Blog Already exists");
       } else {
         const data = await ddbDocClient.send(new PutCommand(putParams));
-        console.log("Success - item added", data);
+        //console.log("Success - item added", data);
         alert("Data Added Successfully");
         router.push("/blogs/view");
         //@ts-ignore
@@ -91,7 +91,7 @@ const AddData = () => {
       }
       
     } catch (err: any) {
-      console.log("Error", err.stack);
+      //console.error("Error", err.stack);
       alert("Error occured" + JSON.stringify(err));
     }
   };

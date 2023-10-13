@@ -35,9 +35,9 @@ const UpdateData = () => {
       }
       const sdata = await ddbDocClient.send(new ScanCommand(params));
       setStoresData(sdata.Items);
-      console.log("sdata", sdata.Items);
+      //console.log("sdata", sdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
   //   scanning the dynamodb table
@@ -52,9 +52,9 @@ const UpdateData = () => {
       }
       const bdata = await ddbDocClient.send(new ScanCommand(params));
       setBrandsData(bdata.Items);
-      console.log("bdata", bdata.Items);
+      //console.log("bdata", bdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -70,9 +70,9 @@ const UpdateData = () => {
       }
       const cdata = await ddbDocClient.send(new ScanCommand(params));
       setCategoriesData(cdata.Items);
-      console.log("cdata", cdata.Items);
+      //console.log("cdata", cdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -109,11 +109,11 @@ const UpdateData = () => {
     // updating the db
     try {
       const data = await ddbDocClient.send(new UpdateCommand(params));
-      console.log("Success - updated", data);
+      //console.log("Success - updated", data);
       alert('Data Updated Successfully')
       router.push('/deals/view')
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 

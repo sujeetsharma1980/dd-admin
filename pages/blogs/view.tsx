@@ -29,9 +29,9 @@ const ViewData = () => {
       }
       const cdata = await ddbDocClient.send(new ScanCommand(params));
       setCategoriesData(cdata.Items);
-      console.log("cdata", cdata.Items);
+      //console.log("cdata", cdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -52,9 +52,9 @@ const ViewData = () => {
       }
       data = await ddbDocClient.send(new ScanCommand(params));
       setTableData(data.Items);
-      console.log("success", data.Items);
+      //console.log("success", data.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -76,7 +76,7 @@ const ViewData = () => {
         },
       };
       const data = await ddbDocClient.send(new UpdateCommand(params));
-      console.log("Success - updated", data);
+      //console.log("Success - updated", data);
       alert('Soft Deleted Successfully')
       /*await ddbDocClient.send(
         new DeleteCommand({
@@ -87,10 +87,10 @@ const ViewData = () => {
           },
         })
       );
-      console.log("Success - item deleted");*/
+      //console.log("Success - item deleted");*/
       scanTable();
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 

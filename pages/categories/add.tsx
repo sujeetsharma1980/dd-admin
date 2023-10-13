@@ -32,7 +32,7 @@ const AddData = () => {
       },
     };
 
-    console.log(params)
+    //console.log(params)
 
     const getParams = {
       TableName: 'Deals',
@@ -49,14 +49,14 @@ const AddData = () => {
         alert("Category already exists");
       } else {
         const data = await ddbDocClient.send(new PutCommand(params));
-        console.log("Success - item added", data);
+        //console.log("Success - item added", data);
         alert("Data Added Successfully");
         router.push("/categories/view");
         //@ts-ignore
         document.getElementById("addData-form").reset();
       }
     } catch (err: any) {
-      console.log("Error", err.stack);
+      console.error("Error", err.stack);
       alert("Error occured" + JSON.stringify(err));
     }
   };

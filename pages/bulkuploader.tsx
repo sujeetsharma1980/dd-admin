@@ -42,21 +42,21 @@ function DealsBulkUpload() {
       const sk = res.Items.map((item) => item.sk)
       setStoresList(sk);
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
     })
   
     ddbDocClient.send(new ScanCommand(getBrandsParams)).then((res) => {
       const sk = res.Items.map((item) => item.sk)
       setBrandsList(sk);
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
     })
   
     ddbDocClient.send(new ScanCommand(getCategoriesParams)).then((res) => {
       const sk = res.Items.map((item) => item.sk)
       setCategoriesList(sk);
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
     })
   }, []);
 
@@ -90,9 +90,9 @@ function DealsBulkUpload() {
 
     try {
       const getData = await ddbDocClient.send(new ScanCommand(getParams));
-      console.log('storesList' + JSON.stringify(storesList));
-      console.log('brandsList' + JSON.stringify(brandsList));
-      console.log('categoriesList' + JSON.stringify(categoriesList));
+      //console.log('storesList' + JSON.stringify(storesList));
+      //console.log('brandsList' + JSON.stringify(brandsList));
+      //console.log('categoriesList' + JSON.stringify(categoriesList));
       if(value[pkIndex].indexOf('P#') > -1) {
         if(value[skIndex] !== 'METADATA') {
           return value[pkIndex] + '| SK missing -> | ' + value[skIndex] + '|';
@@ -110,17 +110,17 @@ function DealsBulkUpload() {
           return value[pkIndex] + '| Category incorrect or missing -> | ' + value[catIndex]+ '|';
         }
       } else if(value[pkIndex] === 'BRANDS') {
-        console.log("value[skIndex]" + value[skIndex])
+        //console.log("value[skIndex]" + value[skIndex])
         if(value[skIndex].indexOf('B#') < 0) {
           return value[pkIndex] + '| SK missing -> |' + value[skIndex]+ '|';
         }
       } else if(value[pkIndex] === 'STORES#') {
-        console.log("value[skIndex]" + value[skIndex])
+        //console.log("value[skIndex]" + value[skIndex])
         if(value[skIndex].indexOf('S#') < 0) {
           return value[pkIndex] + '| SK missing -> |' + value[skIndex]+ '|';
         }
       } else if(value[pkIndex] === 'CATEGORIES') {
-        console.log("value[skIndex]" + value[skIndex])
+        //console.log("value[skIndex]" + value[skIndex])
         if(value[skIndex].indexOf('C#') < 0) {
           return value[pkIndex] + '| SK missing -> |' + value[skIndex]+ '|';
         }
@@ -134,7 +134,7 @@ function DealsBulkUpload() {
         return value[pkIndex] + '|' + value[skIndex] + '| Added successfully |  httpscode: ' + data.$metadata.httpStatusCode;
       }
     } catch (err: any) {
-      console.log("Error", err.stack);
+      console.error("Error", err.stack);
       //alert("Error occured" + JSON.stringify(err));
     }
   };

@@ -36,9 +36,9 @@ const UpdateData = () => {
       }
       const cdata = await ddbDocClient.send(new ScanCommand(params));
       setCategoriesData(cdata.Items);
-      console.log("cdata", cdata.Items);
+     // //console.log("cdata", cdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
  
@@ -78,11 +78,11 @@ const UpdateData = () => {
     // updating the db
     try {
       const data = await ddbDocClient.send(new UpdateCommand(params));
-      console.log("Success - updated", data);
+      //console.log("Success - updated", data);
       alert('Data Updated Successfully')
       router.push('/blogs/view')
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 

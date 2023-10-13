@@ -36,9 +36,9 @@ const AddData = () => {
       }
       const sdata = await ddbDocClient.send(new ScanCommand(params));
       setStoresData(sdata.Items);
-      console.log("bdata", sdata.Items);
+      //console.log("bdata", sdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -54,9 +54,9 @@ const AddData = () => {
       }
       const bdata = await ddbDocClient.send(new ScanCommand(params));
       setBrandsData(bdata.Items);
-      console.log("bdata", bdata.Items);
+      //console.log("bdata", bdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -72,9 +72,9 @@ const AddData = () => {
       }
       const cdata = await ddbDocClient.send(new ScanCommand(params));
       setCategoriesData(cdata.Items);
-      console.log("cdata", cdata.Items);
+      //console.log("cdata", cdata.Items);
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
@@ -122,14 +122,14 @@ const AddData = () => {
         alert("Deal already exists");
       } else {
         const data = await ddbDocClient.send(new PutCommand(params));
-        console.log("Success - item added", data);
+        //console.log("Success - item added", data);
         alert("Data Added Successfully");
         router.push("/deals/view");
         //@ts-ignore
         document.getElementById("addData-form").reset();
       }
     } catch (err: any) {
-      console.log("Error", err.stack);
+      console.error("Error", err.stack);
       alert("Error occured" + JSON.stringify(err));
     }
   };

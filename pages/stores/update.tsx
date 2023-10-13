@@ -40,11 +40,11 @@ const UpdateData = () => {
     // updating the db
     try {
       const data = await ddbDocClient.send(new UpdateCommand(params));
-      console.log("Success - updated", data);
+      //console.log("Success - updated", data);
       alert('Data Updated Successfully')
       router.push('/stores/view')
     } catch (err) {
-      console.log("Error", err);
+      console.error("Error", err);
     }
   };
 
