@@ -1,18 +1,27 @@
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import { ddbDocClient } from "../../util/ddbDocClient";
 import { useRouter } from "next/router";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import dynamic from "next/dynamic";
+
+const MDEditor = dynamic(
+  () => import("@uiw/react-md-editor"),
+  { ssr: false }
+);
 
 const styles = {
-  inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+  inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+  height: "form-group mb-6 h-96"
 }
 
 const UpdateData = () => {
   const router = useRouter();
   const data = router.query;
-
+  const [longDescvalue, setLongDescvalue] = useState("");
   const [brandsData, setBrandsData] = useState([]);
   const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
@@ -21,6 +30,7 @@ const UpdateData = () => {
     getStores();
     getBrands();
     getCategories();
+    setLongDescvalue(data.description as string);
   }, []);
 
   //   scanning the dynamodb table for Stores
@@ -96,7 +106,7 @@ const UpdateData = () => {
         ":q": event.target.image.value,
         ":z": event.target.textLink.value,
         ":t": event.target.title.value,
-        ":l": event.target.description.value,
+        ":l": longDescvalue,
         ":m": event.target.listprice.value,
         ":n": event.target.dealprice.value,
         ":x": event.target.submittedby.value,
@@ -149,9 +159,9 @@ const UpdateData = () => {
               <label htmlFor="title" className="form-label inline-block mb-2 text-gray-700">Title</label>
               <input type="text" className={styles.inputField} id="title" name="title" defaultValue={data.title} />
             </div>
-            <div className="form-group mb-6">
+            <div className={styles.height}>
               <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
-              <textarea className={styles.inputField} id="description" name="description" defaultValue={data.description} />
+              <MDEditor value={longDescvalue} onChange={setLongDescvalue} id="longDesc" />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>
@@ -189,10 +199,6 @@ const UpdateData = () => {
               <option value='' key='blank'></option>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
               </select>
-            </div>
-            <div className="form-group mb-6">
-              <label htmlFor="dealprice" className="form-label inline-block mb-2 text-gray-700">Deal Price</label>
-              <input type="text" className={styles.inputField} id="dealprice" name="dealprice" defaultValue={data.dealprice} />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="deleted" className="form-label inline-block mb-2 text-gray-700">Deleted</label>

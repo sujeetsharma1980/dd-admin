@@ -1,3 +1,5 @@
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../../util/ddbDocClient";
 import { useRouter } from "next/router";
@@ -5,14 +7,21 @@ import Link from "next/link";
 
 import { useEffect, useState } from "react";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
+import dynamic from "next/dynamic";
+
+const MDEditor = dynamic(
+  () => import("@uiw/react-md-editor"),
+  { ssr: false }
+);
 
 const styles = {
   inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+  height: "form-group mb-6 h-96"
 };
 
 const AddData = () => {
   const router = useRouter();
-
+  const [longDescvalue, setLongDescvalue] = useState("");
   const [brandsData, setBrandsData] = useState([]);
   const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
@@ -91,7 +100,7 @@ const AddData = () => {
         dateAdded: new Date().toLocaleString(),
         dateModified: "",
         title: event.target.title.value,
-        description: event.target.description.value,
+        description: longDescvalue,
         image: event.target.image.value,
         textLink: event.target.textLink.value,
         listprice: event.target.listprice.value,
@@ -165,9 +174,9 @@ const AddData = () => {
                 <label htmlFor="title" className="form-label inline-block mb-2 text-gray-700">Title</label>
                 <input type="text" className={styles.inputField} id="title" />
             </div>
-            <div className="form-group mb-6">
+            <div className={styles.height}>
               <label htmlFor="description" className="form-label inline-block mb-2 text-gray-700">Description</label>
-              <textarea className={styles.inputField} id="description" />
+              <MDEditor value={longDescvalue} onChange={setLongDescvalue} id="longDesc" />
             </div>
             <div className="form-group mb-6">
               <label htmlFor="image" className="form-label inline-block mb-2 text-gray-700">Image</label>

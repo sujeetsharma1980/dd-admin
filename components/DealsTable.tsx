@@ -30,8 +30,8 @@ const DealsTable = (props) => {
         <thead className={styles.datatablethead}>
           <tr>
             <th className={styles.thbackgroundcolordarkgray}>
-              <button type="button" onClick={() => requestSort("description")} className={`${styles.theadbtn} ${getClassNamesFor("description")}`}>
-                Title & link
+              <button type="button" onClick={() => requestSort("title")} className={`${styles.theadbtn} ${getClassNamesFor("title")}`}>
+                Title
               </button>
             </th>
             <th className={styles.thbackgroundcolordarkgray}>
@@ -102,7 +102,6 @@ const DealsTable = (props) => {
             items.slice(offset, offset + PER_PAGE).map((item, index) => (
               <tr key={index} className={styles.tablerow}>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>
-                  <Link target='_blank' href={item.textLink}>{item.textLink}</Link>
                   <div>{item.title}</div>
                 </td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>
