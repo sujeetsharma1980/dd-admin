@@ -16,6 +16,7 @@ const MDEditor = dynamic(
 
 const styles = {
   inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+  checkbox: "form-control px-3 py-1.5 ml-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
   height: "form-group mb-6 h-96"
 };
 
@@ -107,9 +108,13 @@ const AddData = () => {
         dealprice: event.target.dealprice.value,
         brandname: event.target.brandname.value,
         category: event.target.category.value,
+        tag: event.target.tag.value,
         storename: event.target.storename.value,
         submittedby: event.target.submittedby.value,
         expiredon: event.target.expiredon.value,
+        popular: event.target.popular.checked,
+        exclusiveone: event.target.exclusiveone.checked,
+        featured: event.target.featured.checked,
         deleted: "n"
       },
     };
@@ -195,6 +200,10 @@ const AddData = () => {
               <input type="text" className={styles.inputField} id="dealprice" />
             </div>
             <div className="form-group mb-6">
+              <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">Tag</label>
+              <input type="text" className={styles.inputField} id="tag" />
+            </div>
+            <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
               <select className={styles.inputField} id="brandname" required>
                 {brandsData.map((brand) => <option value={brand.sk} key={brand.sk}>{brand.brandname}</option>)}
@@ -211,6 +220,18 @@ const AddData = () => {
               <select className={styles.inputField} id="category" required>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
               </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="popular" className="form-label inline-block mb-2 text-gray-700">Popular </label>
+              <input type="checkbox" className={styles.checkbox} id="popular" name="popular"  />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="featured" className="form-label inline-block mb-2 text-gray-700">Featured </label>
+              <input type="checkbox" className={styles.checkbox} id="featured" name="featured" />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="exclusiveone" className="form-label inline-block mb-2 text-gray-700">Exclusive </label>
+              <input type="checkbox" className={styles.checkbox} id="exclusiveone" name="exclusiveone" />
             </div>
             <div className="form-group mb-6">
                 <label htmlFor="submittedby" className="form-label inline-block mb-2 text-gray-700">Submitted By</label>

@@ -15,6 +15,7 @@ const MDEditor = dynamic(
 
 const styles = {
   inputField: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+  checkbox: "form-control px-3 py-1.5 ml-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
   height: "form-group mb-6 h-96"
 }
 
@@ -89,7 +90,7 @@ const UpdateData = () => {
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
-
+    console.log('event' + event.target.exclusiveone.value +  event.target.featured.value +  event.target.popular.value);
     // setting up the parameters for UpdateCommand
     const params = {
       TableName: "Deals",
@@ -98,7 +99,7 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set brandname = :p, category = :r, storename = :s, image = :q, title = :t, submittedby = :x, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
+        "set brandname = :p, category = :r, popular = :h, exclusiveone = :i, featured = :j, storename = :s, image = :q, title = :t, tag = :u, submittedby = :x, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
       ExpressionAttributeValues: {
         ":p": event.target.brandname.value,
         ":r": event.target.category.value,
@@ -107,10 +108,14 @@ const UpdateData = () => {
         ":z": event.target.textLink.value,
         ":t": event.target.title.value,
         ":l": longDescvalue,
+        ":u": event.target.tag.value,
         ":m": event.target.listprice.value,
         ":n": event.target.dealprice.value,
         ":x": event.target.submittedby.value,
         ":o": event.target.deleted.value,
+        ":h": event.target.popular.checked,
+        ":i": event.target.exclusiveone.checked,
+        ":j": event.target.featured.checked,
         ":y": event.target.expiredon.value,
         ":k": new Date().toLocaleString()
       },
@@ -180,6 +185,10 @@ const UpdateData = () => {
               <input type="text" className={styles.inputField} id="dealprice" name="dealprice" defaultValue={data.dealprice} />
             </div>
             <div className="form-group mb-6">
+              <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">Tag</label>
+              <input type="text" className={styles.inputField} id="tag" name="tag" defaultValue={data.tag} />
+            </div>
+            <div className="form-group mb-6">
               <label htmlFor="brandname" className="form-label inline-block mb-2 text-gray-700">Brand</label>
               <select className={styles.inputField} id="brandname" required>
               <option value='' key='blank'></option>
@@ -200,6 +209,19 @@ const UpdateData = () => {
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
               </select>
             </div>
+            <div className="form-group mb-6">
+              <label htmlFor="popular" className="form-label inline-block mb-2 text-gray-700">Popular </label>
+              <input type="checkbox" className={styles.checkbox} id="popular" name="popular" defaultChecked={data.popular === 'true'} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="featured" className="form-label inline-block mb-2 text-gray-700">Featured </label>
+              <input type="checkbox" className={styles.checkbox} id="featured" name="featured" defaultChecked={data.featured === 'true'} />
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="exclusiveone" className="form-label inline-block mb-2 text-gray-700">Exclusive </label>
+              <input type="checkbox" className={styles.checkbox} id="exclusiveone" name="exclusiveone" defaultChecked={data.exclusiveone === 'true'}/>
+            </div>
+
             <div className="form-group mb-6">
               <label htmlFor="deleted" className="form-label inline-block mb-2 text-gray-700">Deleted</label>
               <select className={styles.inputField} id="deleted" defaultValue={data.deleted}>

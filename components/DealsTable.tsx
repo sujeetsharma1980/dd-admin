@@ -64,6 +64,11 @@ const DealsTable = (props) => {
                 Category
               </button>
             </th>
+            <th className={styles.thbackgroundcolordarkgray}>
+              <button type="button" onClick={() => requestSort("tag")} className={`${styles.theadbtn} ${getClassNamesFor("tag")}`}>
+                Tag
+              </button>
+            </th>
             <th className={styles.thbackgroundcolorlightgray}>
               <button type="button" onClick={() => requestSort("dateAdded")} className={`${styles.theadbtn} ${getClassNamesFor("dateAdded")}`}>
                 Date Added
@@ -112,6 +117,7 @@ const DealsTable = (props) => {
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.brandsData.find(brand => brand.sk === item.brandname))?.brandname}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.storesData.find(store => store.sk === item.storename))?.storename}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.tag}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateAdded}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateModified}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.expiredon}</td>
@@ -133,7 +139,11 @@ const DealsTable = (props) => {
                         description: item.description,
                         listprice: item.listprice,
                         dealprice: item.dealprice,
+                        tag: item.tag,
                         submittedby: item.submittedby,
+                        popular: item.popular,
+                        featured: item.featured,
+                        exclusiveone: item.exclusiveone,
                         deleted: item.deleted,
                         expiredon: item.expiredon
                       },
