@@ -24,7 +24,7 @@ const DealsFilterData = ({ data, brandsData, categoriesData, storesData, deleteI
                 item.dateModified.toLowerCase().includes(searchKey.toLowerCase()) ||
                 item.expiredon.toLowerCase().includes(searchKey.toLowerCase()));
 
-            const isActiveCondition = selected === 'active' ? (new Date(item.expiredon) > new Date()) : true;
+            const isActiveCondition = selected === 'active' ? (!item.expiredon ? true : new Date(item.expiredon) >= new Date()) : true;
             const isExpiredCondition = selected === 'expired' ? (new Date(item.expiredon) < new Date()) : true;
             const isPopularCondition = selected === 'popular' ? (item.popular) : true;
             const isExclusiveCondition = selected === 'exclusiveone' ? (item.exclusiveone) : true;
