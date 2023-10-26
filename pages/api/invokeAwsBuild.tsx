@@ -33,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         fetch(webHookUrl, requestMetadata)
             .then(res => res.json())
             .then(ress => {
-                res.status(200).send("Build started successfully.." + JSON.stringify(ress));
+                res.status(200).send("Build started successfully.. webhook -" + webHookUrl +" "+ JSON.stringify(ress));
             });
 
     } catch (error) {

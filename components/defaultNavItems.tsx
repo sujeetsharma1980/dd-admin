@@ -51,10 +51,5 @@ export const defaultNavItems: NavItem[] = [
     label: "File Manager",
     href: "/filemanager",
     icon: <SignalIcon className="w-6 h-6" />,
-  },
-  {
-    label: "Privacy",
-    href: "/privacy",
-    icon: <PencilIcon className="w-6 h-6" />,
-  },
+  }
 ];

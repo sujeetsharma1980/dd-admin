@@ -133,6 +133,7 @@ const DealsTable = (props) => {
                         dateAdded: item.dateAdded,
                         brandname: item.brandname,
                         category: item.category,
+                        subcategory: item.subcategory,
                         storename: item.storename,
                         image: item.image,
                         textLink: item.textLink,

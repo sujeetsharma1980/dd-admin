@@ -26,6 +26,8 @@ const UpdateData = () => {
   const [brandsData, setBrandsData] = useState([]);
   const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [subcategoriesData, setSubcategoriesData] = useState([]);
 
   useEffect(() => {
     getStores();
@@ -33,6 +35,16 @@ const UpdateData = () => {
     getCategories();
     setLongDescvalue(data.description as string);
   }, []);
+
+  useEffect(() => {
+    const category = categoriesData.filter(category => category.sk === data.category)
+    setSubcategoriesData(category[0]?.subcategories)
+  }, [categoriesData, data.category]);
+
+  useEffect(() => {
+    const category = categoriesData.filter(category => category.sk === selectedCategory)
+    setSubcategoriesData(category[0]?.subcategories)
+  }, [selectedCategory]);
 
   //   scanning the dynamodb table for Stores
   const getStores = async () => {
@@ -90,7 +102,7 @@ const UpdateData = () => {
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
-    console.log('event' + event.target.exclusiveone.value +  event.target.featured.value +  event.target.popular.value);
+    alert(event.target.subcategory.value);
     // setting up the parameters for UpdateCommand
     const params = {
       TableName: "Deals",
@@ -99,7 +111,7 @@ const UpdateData = () => {
         sk: data.sk, //sortKey (if any)
       },
       UpdateExpression:
-        "set brandname = :p, category = :r, popular = :h, exclusiveone = :i, featured = :j, storename = :s, image = :q, title = :t, tag = :u, submittedby = :x, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
+        "set brandname = :p, category = :r, popular = :h, exclusiveone = :i, subcategory = :d, featured = :j, storename = :s, image = :q, title = :t, tag = :u, submittedby = :x, textLink = :z, description = :l, listprice = :m, dealprice = :n, dateModified = :k, deleted = :o, expiredon = :y",
       ExpressionAttributeValues: {
         ":p": event.target.brandname.value,
         ":r": event.target.category.value,
@@ -116,6 +128,7 @@ const UpdateData = () => {
         ":h": event.target.popular.checked,
         ":i": event.target.exclusiveone.checked,
         ":j": event.target.featured.checked,
+        ":d": event.target.subcategory.value,
         ":y": event.target.expiredon.value,
         ":k": new Date().toLocaleString()
       },
@@ -204,9 +217,15 @@ const UpdateData = () => {
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-              <select className={styles.inputField} id="category" required>
+              <select className={styles.inputField} id="category"  onChange={(e) => setSelectedCategory(e.target.value)} required>
               <option value='' key='blank'></option>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk} selected={category.sk === data.category}>{category.categoryname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="subcategory" className="form-label inline-block mb-2 text-gray-700">Sub Category</label>
+              <select className={styles.inputField} id="subcategory" required>
+                {subcategoriesData?.map((subcategory) => <option value={subcategory} key={subcategory} selected={subcategory === data.subcategory}>{subcategory}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">

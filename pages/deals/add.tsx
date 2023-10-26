@@ -26,12 +26,19 @@ const AddData = () => {
   const [brandsData, setBrandsData] = useState([]);
   const [storesData, setStoresData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [subcategoriesData, setSubcategoriesData] = useState([]);
 
   useEffect(() => {
     getBrands();
     getStores();
     getCategories();
   }, []);
+
+  useEffect(() => {
+    const category = categoriesData.filter(category => category.sk === selectedCategory)
+    setSubcategoriesData(category[0]?.subcategories)
+  }, [selectedCategory]);
 
 
   //   scanning the dynamodb table for Stores
@@ -108,6 +115,7 @@ const AddData = () => {
         dealprice: event.target.dealprice.value,
         brandname: event.target.brandname.value,
         category: event.target.category.value,
+        subcategory: event.target.subCategory.value,
         tag: event.target.tag.value,
         storename: event.target.storename.value,
         submittedby: event.target.submittedby.value,
@@ -217,8 +225,15 @@ const AddData = () => {
             </div>
             <div className="form-group mb-6">
               <label htmlFor="category" className="form-label inline-block mb-2 text-gray-700">Category</label>
-              <select className={styles.inputField} id="category" required>
+              <select className={styles.inputField} id="category" onChange={(e) => setSelectedCategory(e.target.value)} required>
+                <option value="" key=""></option>
                 {categoriesData.map((category) => <option value={category.sk} key={category.sk}>{category.categoryname}</option>)}
+              </select>
+            </div>
+            <div className="form-group mb-6">
+              <label htmlFor="subcategory" className="form-label inline-block mb-2 text-gray-700">Sub Category</label>
+              <select className={styles.inputField} id="subcategory" required>
+                {subcategoriesData?.map((subcategory) => <option value={subcategory} key={subcategory}>{subcategory}</option>)}
               </select>
             </div>
             <div className="form-group mb-6">
@@ -235,7 +250,7 @@ const AddData = () => {
             </div>
             <div className="form-group mb-6">
                 <label htmlFor="submittedby" className="form-label inline-block mb-2 text-gray-700">Submitted By</label>
-                <input type="text" className={styles.inputField} id="submittedby" />
+                <input type="text" className={styles.inputField} id="submittedby" defaultValue="Deal Detector Team"/>
             </div>
             <div className="form-group mb-6">
               <label htmlFor="expiredon" className="form-label inline-block mb-2 text-gray-700">Expired On</label>
