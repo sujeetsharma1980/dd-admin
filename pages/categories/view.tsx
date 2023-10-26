@@ -8,7 +8,7 @@ import { PencilSquareIcon, XCircleIcon } from "@heroicons/react/24/outline";
 const Styles = {
   tableHeadings:
     "text-sm font-medium text-gray-900 px-2 py-2 text-left border-2",
-  tableData: "text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap",
+  tableData: "text-sm text-gray-900 font-light px-2 py-2 ",
 };
 
 const ViewData = () => {
@@ -100,7 +100,7 @@ const ViewData = () => {
                     <tr>
                       <th scope="col" className={Styles.tableHeadings}>Category Name</th>
                       <th scope="col" className={Styles.tableHeadings}>LOB</th>
-                      <th scope="col" className={Styles.tableHeadings}>Sub Categories</th>
+                      <th scope="col" className={Styles.tableHeadings + " w-52"}>Sub Categories</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Added</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Modified</th>
                       <th scope="col" className={Styles.tableHeadings}>Show on Homepage</th>
