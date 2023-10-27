@@ -30,7 +30,7 @@ const DealsTable = (props) => {
         <thead className={styles.datatablethead}>
           <tr>
             <th className={styles.thbackgroundcolordarkgray}>
-              <button type="button" onClick={() => requestSort("title")} className={`${styles.theadbtn} ${getClassNamesFor("title")}`}>
+              <button type="button" onClick={() => requestSort("title")} className={`${styles.theadbtn } ${getClassNamesFor("title")}`}>
                 Title
               </button>
             </th>
@@ -65,8 +65,13 @@ const DealsTable = (props) => {
               </button>
             </th>
             <th className={styles.thbackgroundcolordarkgray}>
+              <button type="button" onClick={() => requestSort("subcategory")} className={`${styles.theadbtn} ${getClassNamesFor("subcategory")}`}>
+                SubCategory
+              </button>
+            </th>
+            <th className={styles.thbackgroundcolordarkgray}>
               <button type="button" onClick={() => requestSort("tag")} className={`${styles.theadbtn} ${getClassNamesFor("tag")}`}>
-                Tag
+                SEO Tags
               </button>
             </th>
             <th className={styles.thbackgroundcolorlightgray}>
@@ -106,7 +111,7 @@ const DealsTable = (props) => {
           ) : (
             items.slice(offset, offset + PER_PAGE).map((item, index) => (
               <tr key={index} className={styles.tablerow}>
-                <td className={styles.tabledata+ ' text-sm font-medium'}>
+                <td className={styles.tabledata+ ' text-sm font-medium w-64'}>
                   <div>{item.title}</div>
                 </td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>
@@ -117,6 +122,7 @@ const DealsTable = (props) => {
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.brandsData.find(brand => brand.sk === item.brandname))?.brandname}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.storesData.find(store => store.sk === item.storename))?.storename}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
+                <td className={styles.tabledata+ ' text-sm font-medium'}>{item.subcategory}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.tag}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateAdded}</td>
                 <td className={styles.tabledata+ ' text-sm font-medium'}>{item.dateModified}</td>

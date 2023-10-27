@@ -100,7 +100,7 @@ const ViewData = () => {
                     <tr>
                       <th scope="col" className={Styles.tableHeadings}>Category Name</th>
                       <th scope="col" className={Styles.tableHeadings}>LOB</th>
-                      <th scope="col" className={Styles.tableHeadings + " w-52"}>Sub Categories</th>
+                      <th scope="col" className={Styles.tableHeadings + " w-80"}>Sub Categories</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Added</th>
                       <th scope="col" className={Styles.tableHeadings}>Date Modified</th>
                       <th scope="col" className={Styles.tableHeadings}>Show on Homepage</th>
@@ -119,7 +119,7 @@ const ViewData = () => {
                           {item.categoryname}
                         </td>
                         <td className={Styles.tableData}>{item.lob}</td>
-                        <td className={Styles.tableData}>{item.subcategories?.join(',')}</td>
+                        <td className={Styles.tableData}>{item.subcategories?.join(', ')}</td>
                         <td className={Styles.tableData}>{item.dateAdded}</td>
                         <td className={Styles.tableData}>{item.dateModified}</td>
                         <td className={Styles.tableData}>{item.showonhomepage}</td>

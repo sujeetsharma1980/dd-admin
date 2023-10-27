@@ -30,11 +30,6 @@ const BlogsTable = (props) => {
         <thead className={styles.datatablethead}>
           <tr>
             <th className={styles.thbackgroundcolordarkgray}>
-              <button type="button" onClick={() => requestSort("slug")} className={`${styles.theadbtn} ${getClassNamesFor("slug")}`}>
-                Slug
-              </button>
-            </th>
-            <th className={styles.thbackgroundcolordarkgray}>
               <button type="button" onClick={() => requestSort("title")} className={`${styles.theadbtn} ${getClassNamesFor("title")}`}>
                 Title
               </button>
@@ -81,10 +76,7 @@ const BlogsTable = (props) => {
           ) : (
             items.slice(offset, offset + PER_PAGE).map((item, index) => (
               <tr key={index} className={styles.tablerow}>
-                <td className={styles.tabledata}>
-                  <div>{item.slug}</div>
-                </td>
-                <td className={styles.tabledata}>{item.title}</td>
+                <td className={styles.tabledata + " w-80"}>{item.title}</td>
                 <td className={styles.tabledata}>{item.tag}</td>
                 <td className={styles.tabledata}>{(props.categoriesData.find(category => category.sk === item.category))?.categoryname}</td>
                 <td className={styles.tabledata}>{item.dateAdded}</td>

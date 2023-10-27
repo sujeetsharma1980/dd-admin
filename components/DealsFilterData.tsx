@@ -5,26 +5,27 @@ import styles from "./DataTable.module.scss";
 const DealsFilterData = ({ data, brandsData, categoriesData, storesData, deleteItem }) => {
     const [filteredData, setFilteredData] = useState("");
     const [selected, setSelected] = useState("");
-    console.log(`Option selecteds:`, selected);
+    //console.log(`Option selecteds:`, selected);
 
     function filteration(data, searchKey, selected?) {
         const newarr = data.filter((item) => {
-            console.log('item.popular' + typeof(item.popular))
+            //console.log('item.popular' + typeof(item.popular))
             const searchKeyCheck = (item.textLink.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.title.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.submittedby.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.description.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.image.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.listprice.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.dealprice.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.storename.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.brandname.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.category.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.dateAdded.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.dateModified.toLowerCase().includes(searchKey.toLowerCase()) ||
-                item.expiredon.toLowerCase().includes(searchKey.toLowerCase()));
+                item.title?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.submittedby?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.description?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.image?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.listprice?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.dealprice?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.storename?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.brandname?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.category?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.subcategory?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.dateAdded?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.dateModified?.toLowerCase().includes(searchKey.toLowerCase()) ||
+                item.expiredon?.toLowerCase().includes(searchKey.toLowerCase()));
 
-            const isActiveCondition = selected === 'active' ? (!item.expiredon ? true : new Date(item.expiredon) >= new Date()) : true;
+            const isActiveCondition = selected === 'active' ? ((!item.expiredon ? true : new Date(item.expiredon) >= new Date()) && item.deleted !== 'y') : true;
             const isExpiredCondition = selected === 'expired' ? (new Date(item.expiredon) < new Date()) : true;
             const isPopularCondition = selected === 'popular' ? (item.popular) : true;
             const isExclusiveCondition = selected === 'exclusiveone' ? (item.exclusiveone) : true;

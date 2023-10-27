@@ -208,7 +208,7 @@ const AddData = () => {
               <input type="text" className={styles.inputField} id="dealprice" />
             </div>
             <div className="form-group mb-6">
-              <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">Tag</label>
+              <label htmlFor="tag" className="form-label inline-block mb-2 text-gray-700">SEO Tags</label>
               <input type="text" className={styles.inputField} id="tag" />
             </div>
             <div className="form-group mb-6">

@@ -95,12 +95,6 @@ const UpdateData = () => {
     setSubcategories(updatedSubcategories);
   };
 
-  const handleCatSubmit = (e) => {
-    e.preventDefault();
-    // Do something with the subcategories, e.g., send them to an API or save to state.
-    console.log('Subcategories:', subcategories);
-  };
-
   return (
     <>
       <div className="container mx-auto py-10 flex flex-col w-screen items-center">
